@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/25 14:58:32 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/25 16:41:41 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		make_fractal(t_mlx *f)
 	else if (ft_strcmp(f->name, "Autre") == 0)
 		printf("Autre\n");
 	mlx_put_image_to_window(f->mlx, f->win, f->img, f->pos_x, f->pos_y);
-	printf("r=%d g=%d b=%d\n", f->r, f->g, f->b);
 }
 
 int			main(int ac, char **av)
