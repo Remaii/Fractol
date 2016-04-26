@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/25 15:31:17 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/26 17:45:03 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
 # define MIN 0
-# define MAX 400
+# define MAX 4000
 
 typedef struct		s_mlx
 {
@@ -34,6 +34,7 @@ typedef struct		s_mlx
 	int				end;
 	int				pos_x;
 	int				pos_y;
+	int				motion;
 
 	char			*name;
 	int				img_x;
@@ -56,20 +57,42 @@ typedef struct		s_mlx
 	int				r;
 	int				g;
 	int				b;
+	double			mouse_x;
+	double			mouse_y;
 }					t_mlx;
 
 /*
 ** mandelbrot.c
 */
 
+void				make_point(t_mlx *f, int i, int it);
 void				mandelbrot(t_mlx *f);
+
+/*
+** mandelbrot.c
+*/
+
+void				julia(t_mlx *f);
+
+void			buddhabrot(t_mlx *f);
 
 /*
 ** utilis.c
 */
 
+void				ft_stop(t_mlx *f);
 void				error(int nb);
+
+/*
+** hook.c
+*/
+
 int					ft_key(int keycode, t_mlx *f);
+int					ft_mouse(int but, int x, int y, t_mlx *f);
+int					mouse_move(int x, int y, t_mlx *f);
+
+
+void				zoom(int but, int x, int y, t_mlx *f);
 
 /*
 ** init.c
@@ -77,7 +100,8 @@ int					ft_key(int keycode, t_mlx *f);
 
 void				ini_mandelbrot(t_mlx *f);
 void				init_env(t_mlx *f);
-void				init_frac(t_mlx *f, int ac, char **av);
+void				re_init_frac(t_mlx *f);
+void				init_frac(t_mlx *f, int ac, char *av);
 
 void				make_fractal(t_mlx *f);
 #endif

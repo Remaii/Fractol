@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 13:56:22 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/25 15:28:05 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/26 17:14:51 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void			make_point(t_mlx *f, int i, int it)
 	index = f->x * (f->bpp / 8) + (f->y * f->size);
 	if (i == it)
 	{
-		f->data[index] = 255;
-		f->data[index + 1] = 255;
-		f->data[index + 2] = 255;
+		f->data[index] = 0;
+		f->data[index + 1] = 0;
+		f->data[index + 2] = 0;
 	}
 	else
 	{
@@ -41,8 +41,8 @@ void			mandelbrot(t_mlx *f)
 		{
 			f->cr = f->x / f->zoom_x + f->x1;
 			f->ci = f->y / f->zoom_y + f->y1;
-			f->zr = 0;
-			f->zi = 0;
+			f->zr = 0 + f->mouse_x;
+			f->zi = 0 + f->mouse_y;
 			f->i = 0;
 			while (f->zr * f->zr + f->zi * f->zi < 4 && f->i < f->it)
 			{
