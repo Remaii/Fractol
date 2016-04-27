@@ -6,15 +6,15 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 12:17:51 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/26 10:38:08 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/27 15:54:36 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-void			make_point(t_mlx *f, int i, int it)
+void		make_point(t_mlx *f, int i, int it)
 {
-	int			index;
+	int		index;
 
 	index = f->x * (f->bpp / 8) + (f->y * f->size);
 	if (i == it)
@@ -42,7 +42,7 @@ void		error(int nb)
 		ft_putendl("error 3");
 	else
 		ft_putnbr(nb);
-	exit (0);
+	exit(0);
 }
 
 void		ft_stop(t_mlx *f)

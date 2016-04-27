@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 10:36:40 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/27 13:04:53 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/27 17:13:54 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_key(int key, t_mlx *f)
 		zoom(key, (f->img_x / 2), (f->img_y / 2), f);
 	else if (key == 38)
 	{
-		if (f->julia > 3)
+		if (f->julia > 4)
 			f->julia = 1;
 		else
 			f->julia++;
@@ -79,8 +79,8 @@ int			mouse_move(int x, int y, t_mlx *f)
 {
 	if (x <= (int)f->img_x && y <= (int)f->img_y && f->motion == 1)
 	{
-		f->mouse_x = x * 0.0005;
-		f->mouse_y = y * 0.0005;
+		f->mouse_x = ((double)x - 500) / 500;//x * 0.0005;
+		f->mouse_y = ((double)y - 500) / 500;//y * 0.0005;
 		ini_img(f);
 		make_fractal(f);
 	}
@@ -98,13 +98,11 @@ int			ft_mouse(int but, int x, int y, t_mlx *f)
 	}
 	else if (but == 2 && f->motion == 0)
 	{
-		f->mouse_x = x * 0.0005;
-		f->mouse_y = y * 0.0005;
+		f->mouse_x = ((double)x - 500) / 500;//x * 0.0005;
+		f->mouse_y = ((double)y - 500) / 500;//y * 0.0005;
 	}
 	else if (but == 4 || but == 5)
 		zoom(but, (f->img_x / 2), (f->img_y / 2), f);
-	else
-		ft_putendl(ft_itoa(but));
 	ini_img(f);
 	make_fractal(f);
 	return (0);

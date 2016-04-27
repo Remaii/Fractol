@@ -30,18 +30,8 @@ void			make_buddha(t_mlx *f)
 		f->data[index + 2] = f->i * f->r / f->it;
 	}
 }
-/*
-void			make2(t_mlx *f, int i)
-{
-	double	zr;
-	double	zi;
 
-	zr = f->zr;
-	zi = f->zi;
-
-}
-*/
-void			buddhabrot(t_mlx *f)
+void			buddhabrot2(t_mlx *f)
 {
 	f->x = 0;
 	while (f->x < f->img_x)
@@ -65,5 +55,40 @@ void			buddhabrot(t_mlx *f)
 			f->y++;
 		}
 		f->x++;
+	}
+}
+
+t_comp		mult(t_comp z, t_comp c)
+{
+	t_comp ret;
+
+	ret.r = (z.r * z.r) + (z.i * z.i) + c.r;
+	ret.i = (z.r * z.r) + (z.i * z.i) + c.i;
+	return (ret);
+}
+
+void 			buddhabrot(t_mlx *f)
+{
+	t_comp c;
+	t_comp z;
+
+	f->x = 0;
+	while (++f->x < f->img_x)
+	{
+		f->y = 0;
+		while (++f->y < f->img_y)
+		{
+			c.r = (f->x * 3) / f->img_x - 2;
+			c.i = (f->y * 3) / f->img_y - 1.5;
+			z.r = 0;
+			z.i = 0;
+			f->i = 0;
+			while (z.r * z.r + z.i * z.i < 4.0 && f->i < f->it)
+			{
+				z = mult(z, c);
+				f->i++;
+				make_point(f, f->i, f->it);
+			}
+		}
 	}
 }

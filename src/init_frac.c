@@ -6,11 +6,25 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 12:31:50 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/27 12:31:53 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/27 15:53:28 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
+
+void			choose_julia(t_mlx *f)
+{
+	if (f->julia == 1)
+		set_julia1(f);
+	else if (f->julia == 2)
+		set_julia2(f);
+	else if (f->julia == 3)
+		set_julia3(f);
+	else if (f->julia == 4)
+		set_julia4(f);
+	else if (f->julia == 5)
+		set_julia5(f);
+}
 
 void			ini_buddha(t_mlx *f)
 {
@@ -18,7 +32,7 @@ void			ini_buddha(t_mlx *f)
 	f->y1 = -2;
 	f->x2 = 1.125;
 	f->y2 = 1;
-	f->it = 100;
+	f->it = 1000;
 	f->mouse_x = 0;
 	f->mouse_y = 0;
 	f->img_x = WIN_X;
@@ -55,10 +69,10 @@ void			ini_julia(t_mlx *f)
 	f->img_y = WIN_Y;
 	f->zoom_x = f->img_x / (f->x2 - f->x1);
 	f->zoom_y = f->img_y / (f->y2 - f->y1);
-  choose_julia(f);
+	choose_julia(f);
 }
 
-void		init_frac(t_mlx *f, int ac, char *av)
+void			init_frac(t_mlx *f, int ac, char *av)
 {
 	if (ac == 2)
 	{
@@ -71,7 +85,7 @@ void		init_frac(t_mlx *f, int ac, char *av)
 		else if (ft_strcmp(av, "Julia") == 0 || ft_strcmp(av, "J") == 0 \
 				|| ft_strcmp(av, "j") == 0)
 		{
-      f->julia = 1;
+			f->julia = 1;
 			ini_julia(f);
 			f->name = "Julia";
 		}
