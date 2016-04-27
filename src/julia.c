@@ -22,8 +22,8 @@ void			julia(t_mlx *f)
 		{
 			f->zr = f->x / f->zoom_x + f->x1;
 			f->zi = f->y / f->zoom_y + f->y1;
-			f->cr = -0.6 + f->mouse_x;
-			f->ci = 0.6 + f->mouse_y;
+			f->cr = f->cr2 + f->mouse_x;
+			f->ci = f->ci2 + f->mouse_y;
 			f->i = 0;
 			while (f->zr * f->zr + f->zi * f->zi < 4 && f->i < f->it)
 			{

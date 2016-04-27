@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 10:36:40 by rthidet           #+#    #+#             */
-/*   Updated: 2016/04/26 17:12:25 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/27 13:04:53 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,28 @@ void		move(t_mlx *f, int key)
 {
 	if (key == 123)
 	{
-		f->x1 -= 0.005;
-		f->x2 -= 0.005;
+		f->x1 -= 0.05;
+		f->x2 -= 0.05;
 	}
 	else if (key == 124)
 	{
-		f->x1 += 0.005;
-		f->x2 += 0.005;
+		f->x1 += 0.05;
+		f->x2 += 0.05;
 	}
 	else if (key == 126)
 	{
-		f->y1 -= 0.005;
-		f->y2 -= 0.005;
+		f->y1 -= 0.05;
+		f->y2 -= 0.05;
 	}
 	else if (key == 125)
 	{
-		f->y1 += 0.005;
-		f->y2 += 0.005;
+		f->y1 += 0.05;
+		f->y2 += 0.05;
 	}
 }
 
 int			ft_key(int key, t_mlx *f)
 {
-	mlx_clear_window(f->mlx, f->win);
 	if (key == 53)
 		ft_stop(f);
 	else if (key == 123 || key == 124 || key == 125 || key == 126)
@@ -59,10 +58,15 @@ int			ft_key(int key, t_mlx *f)
 	}
 	else if (key == 24 || key == 27)
 		zoom(key, (f->img_x / 2), (f->img_y / 2), f);
-	else
-		ft_putendl(ft_itoa(key));
-	//mlx_destroy_image(f->mlx, f->img);
-	//f->img = mlx_new_image(f->mlx, f->img_x, f->img_y);
+	else if (key == 38)
+	{
+		if (f->julia > 3)
+			f->julia = 1;
+		else
+			f->julia++;
+		choose_julia(f);
+	}
+	ini_img(f);
 	make_fractal(f);
 	return (0);
 }
@@ -77,7 +81,7 @@ int			mouse_move(int x, int y, t_mlx *f)
 	{
 		f->mouse_x = x * 0.0005;
 		f->mouse_y = y * 0.0005;
-		mlx_clear_window(f->mlx, f->win);
+		ini_img(f);
 		make_fractal(f);
 	}
 	return (0);
@@ -99,9 +103,9 @@ int			ft_mouse(int but, int x, int y, t_mlx *f)
 	}
 	else if (but == 4 || but == 5)
 		zoom(but, (f->img_x / 2), (f->img_y / 2), f);
-//	mlx_destroy_image(f->mlx, f->img);
-//	f->img = mlx_new_image(f->mlx, f->img_x, f->img_y);
-	mlx_clear_window(f->mlx, f->win);
+	else
+		ft_putendl(ft_itoa(but));
+	ini_img(f);
 	make_fractal(f);
 	return (0);
 }

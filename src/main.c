@@ -29,12 +29,9 @@ int			main(int ac, char **av)
 
 	init_frac(&f, ac, av[1]);
 	make_fractal(&f);
-//	mlx_key_hook(f.win, ft_key, &f);
 	mlx_hook(f.win, 2, 1, ft_key, &f);
 	mlx_mouse_hook(f.win, ft_mouse, &f);
-	mlx_hook(f.win, 6, (1L << 7), mouse_move, &f);
-//	if (ft_strcmp(f.name, "Julia") == 0)
-//		mlx_hook(f.win, 6, (1L << 7), mouse_move, &f);
+	mlx_hook(f.win, 6, (1L << 6), mouse_move, &f);
 	mlx_loop(f.mlx);
 	return (0);
 }
