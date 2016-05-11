@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/11 10:23:26 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/04/29 13:31:04 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
 # define MIN 100
-# define MAX 4000
+# define MAX 400
 # define WIN_X 1000
 # define WIN_Y 1000
 
@@ -107,7 +107,7 @@ void 				set_julia5(t_mlx *f);
 void				make_point(t_mlx *f, int i, int it);
 void				ft_stop(t_mlx *f);
 void				error(int nb);
-
+void				ft_color(t_mlx *f, int key);
 /*
 ** hook.c
 */
