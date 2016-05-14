@@ -7,7 +7,9 @@ __kernel void mandel(__global char *data,
 					double zoom_x,
 					double zoom_y,
 					double xx,
-					double yy)
+					double yy,
+					double mouse_x,
+					double mouse_y)
 {
 	int i;
 	int index;
