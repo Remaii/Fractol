@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/11 10:23:26 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/14 02:13:18 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
 # define MIN 100
-# define MAX 4000
+# define MAX 400
 # define WIN_X 1000
-# define WIN_Y 1000
+# define WIN_Y 900
 
 typedef struct		s_comp
 {

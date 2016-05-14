@@ -6,11 +6,11 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 19:51:06 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/14 02:08:48 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:34:40 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "../inc/mlx.h"
 #include "OpenCL/opencl.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -115,7 +115,7 @@ void					set_arg(t_ocl *o, t_mlx *f)
 	o->err = clSetKernelArg(o->kernel, 6, sizeof(int), &f->zoom_x);
 	o->err = clSetKernelArg(o->kernel, 7, sizeof(int), &f->zoom_y);
 	o->err = clSetKernelArg(o->kernel, 8, sizeof(int), &f->xx);
-	o->err = clSetKernelArg(o->kernel, 8, sizeof(int), &f->yy);
+	o->err = clSetKernelArg(o->kernel, 9, sizeof(int), &f->yy);
 	printf("kernel arg %d\n", o->err);
 }
 
@@ -159,7 +159,16 @@ int						main()
 	printf("output %d\n", o.err);
 	o.kernel = get_kernel(&o, filename);
 	printf("kernel %d\n", o.err);
-	set_arg(&o, &f);
-	mlx_loop(f.mlx);
+/*	set_arg(&o, &f);
+	i = 0;
+	size_t size_offset[2] = {1024, 1024 / o.num_dev};
+	while (i < o.num_dev)
+	{
+		size_t device_work[2] = {0, size_offset[1] * i};
+		size_t offset = device_work[1] * 3 * 1024;
+		o.err = clEnqueueNDRangeKernel(o.cmd_queue[i], o.kernel, 2, device_work, size_offset, NULL, 0, NULL, NULL);
+		i++;
+	}
+*/	mlx_loop(f.mlx);
 	return (0);
 }
