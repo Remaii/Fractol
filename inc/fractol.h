@@ -6,30 +6,53 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/14 18:13:36 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 18:40:08 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include "OpenCL/opencl.h"
 # include "../inc/libft.h"
 # include "../inc/mlx.h"
+# include <sys/stat.h>
 # include <stdlib.h>
-
 # include <stdio.h>
 
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
 # define MIN 100
 # define MAX 400
-# define WIN_X 1000
-# define WIN_Y 900
+# define WIN_X 1024
+# define WIN_Y 1024
+
+# define DEBUG printf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
 typedef struct		s_comp
 {
 	double		r;
 	double		i;
 }									t_comp;
+
+typedef struct			s_ocl
+{
+	cl_platform_id		platform;
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_device_id		device;
+	cl_uint				num_dev;
+	cl_context			context;
+	cl_command_queue	cmd_queue;
+	cl_int				i;
+	cl_int				j;
+	cl_int				err;
+	cl_mem				out;
+	char				*file;
+	size_t				size;
+	cl_context_properties	propreties[3];
+	cl_uint				plat_num;
+	size_t				global[3];
+}						t_ocl;
 
 typedef struct		s_mlx
 {
@@ -44,7 +67,7 @@ typedef struct		s_mlx
 	int				pos_y;
 	int				motion;
 	char			*name;
-
+	int				ocl;
 	int				img_x;
 	int				img_y;
 	double			x1;
@@ -71,6 +94,12 @@ typedef struct		s_mlx
 	double			mouse_y;
 	int				julia;
 }					t_mlx;
+
+/*
+** ocl.c
+*/
+
+void				set_arg(t_mlx *f);
 
 /*
 ** mandelbrot.c
@@ -129,7 +158,7 @@ void				zoom(int but, int x, int y, t_mlx *f);
 void				ini_mandelbrot(t_mlx *f);
 void				ini_julia(t_mlx *f);
 void				ini_buddha(t_mlx *f);
-void				init_frac(t_mlx *f, int ac, char *av);
+void				init_frac(t_mlx *f, int ac, char **av);
 void				choose_julia(t_mlx *f);
 
 /*

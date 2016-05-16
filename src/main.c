@@ -6,11 +6,25 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/01 19:00:45 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 19:06:24 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
+
+void			choose_julia(t_mlx *f)
+{
+	if (f->julia == 1)
+		set_julia1(f);
+	else if (f->julia == 2)
+		set_julia2(f);
+	else if (f->julia == 3)
+		set_julia3(f);
+	else if (f->julia == 4)
+		set_julia4(f);
+	else if (f->julia == 5)
+		set_julia5(f);
+}
 
 void		make_fractal(t_mlx *f)
 {
@@ -27,7 +41,7 @@ int			main(int ac, char **av)
 {
 	t_mlx	f;
 
-	init_frac(&f, ac, av[1]);
+	init_frac(&f, ac, av);
 	make_fractal(&f);
 	mlx_hook(f.win, 2, 1, ft_key, &f);
 	mlx_mouse_hook(f.win, ft_mouse, &f);

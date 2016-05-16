@@ -20,7 +20,7 @@ SRC = *.c
 
 #STANDARD VARIABLES
 CC = gcc -Wall -Wextra -Werror
-C_MLX = -framework OpenGL -framework AppKit
+C_MLX = -framework OpenGL -framework AppKit -framework OpenCL
 AR = ar -cvq libft.a
 RM = rm -rf
 SRCDIR = $(addprefix ./src/, $(SRC))

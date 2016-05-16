@@ -6,25 +6,11 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 12:31:50 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/01 19:00:02 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 19:00:02 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-
-void			choose_julia(t_mlx *f)
-{
-	if (f->julia == 1)
-		set_julia1(f);
-	else if (f->julia == 2)
-		set_julia2(f);
-	else if (f->julia == 3)
-		set_julia3(f);
-	else if (f->julia == 4)
-		set_julia4(f);
-	else if (f->julia == 5)
-		set_julia5(f);
-}
 
 void			ini_buddha(t_mlx *f)
 {
@@ -72,31 +58,61 @@ void			ini_julia(t_mlx *f)
 	choose_julia(f);
 }
 
-void			init_frac(t_mlx *f, int ac, char *av)
+void			verif(t_mlx *f, int ac, char **av)
+{
+	if (ac == 3 && ft_strcmp(av[2], "cl") == 0)
+	{
+		if (ft_strcmp(av[1], "Mandelbrot") == 0 || ft_strcmp(av[1], "M") == 0 \
+				|| ft_strcmp(av[1], "m") == 0)
+		{
+			ini_mandelbrot(f);
+			f->name = "src/mandel1.cl";
+		}
+		else if (ft_strcmp(av[1], "Julia") == 0 || ft_strcmp(av[1], "J") == 0 \
+				|| ft_strcmp(av[1], "j") == 0)
+		{
+			f->julia = 1;
+			ini_julia(f);
+			f->name = "julia.cl";
+		}
+		else if (ft_strcmp(av[1], "Buddhabrot") == 0 || ft_strcmp(av[1], "B") == 0 \
+				|| ft_strcmp(av[1], "b") == 0)
+		{
+			ini_buddha(f);
+			f->name = "buddhabrot.cl";
+		}
+		init_env(f);
+		set_arg(f);
+	}
+	else
+		error(1);
+}
+
+void			init_frac(t_mlx *f, int ac, char **av)
 {
 	if (ac == 2)
 	{
-		if (ft_strcmp(av, "Mandelbrot") == 0 || ft_strcmp(av, "M") == 0 \
-				|| ft_strcmp(av, "m") == 0)
+		if (ft_strcmp(av[1], "Mandelbrot") == 0 || ft_strcmp(av[1], "M") == 0 \
+				|| ft_strcmp(av[1], "m") == 0)
 		{
 			ini_mandelbrot(f);
 			f->name = "Mandelbrot";
 		}
-		else if (ft_strcmp(av, "Julia") == 0 || ft_strcmp(av, "J") == 0 \
-				|| ft_strcmp(av, "j") == 0)
+		else if (ft_strcmp(av[1], "Julia") == 0 || ft_strcmp(av[1], "J") == 0 \
+				|| ft_strcmp(av[1], "j") == 0)
 		{
 			f->julia = 1;
 			ini_julia(f);
 			f->name = "Julia";
 		}
-		else if (ft_strcmp(av, "Buddhabrot") == 0 || ft_strcmp(av, "B") == 0 \
-				|| ft_strcmp(av, "b") == 0)
+		else if (ft_strcmp(av[1], "Buddhabrot") == 0 || ft_strcmp(av[1], "B") == 0 \
+				|| ft_strcmp(av[1], "b") == 0)
 		{
 			ini_buddha(f);
 			f->name = "Buddhabrot";
 		}
 	}
 	else
-		error(1);
+		verif(f, ac, av);
 	init_env(f);
 }

@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 13:02:30 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/01 18:59:33 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 16:15:23 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		init_env(t_mlx *f)
 	f->b = 400;
 	f->julia = 1;
 	f->motion = 0;
+	f->ocl = 1;
 }
 
 void		re_init_frac(t_mlx *f)
