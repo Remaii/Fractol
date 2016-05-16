@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 12:31:50 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/16 19:00:02 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 19:08:58 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			verif(t_mlx *f, int ac, char **av)
 				|| ft_strcmp(av[1], "m") == 0)
 		{
 			ini_mandelbrot(f);
-			f->name = "src/mandel1.cl";
+			f->name = "src/mandel.cl";
 		}
 		else if (ft_strcmp(av[1], "Julia") == 0 || ft_strcmp(av[1], "J") == 0 \
 				|| ft_strcmp(av[1], "j") == 0)

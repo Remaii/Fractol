@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 12:44:07 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/16 18:56:17 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/16 19:22:19 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_ocl			*ocl(t_mlx *f)
 	printf("8 err = %d\n", o->err);
 	o->kernel = clCreateKernel(o->program, "mandel", &o->err);
 	printf("9 err = %d\n", o->err);
-	o->out = clCreateBuffer(o->context, CL_MEM_WRITE_ONLY, 1024 * f->size, NULL, &o->err);
+	o->out = clCreateBuffer(o->context, CL_MEM_WRITE_ONLY, WIN_X * f->size, NULL, &o->err);
 	printf("10 err = %d\n", o->err);
 	o->global[0] = WIN_X;
 	o->global[1] = WIN_Y;

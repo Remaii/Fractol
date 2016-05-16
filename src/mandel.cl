@@ -1,4 +1,4 @@
-__kernel void mandel(__global char *data,
+__kernel void mandel(__global char * data,
 					int bpp,
 					int size,
 					double zoom_x,
