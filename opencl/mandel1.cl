@@ -1,29 +1,26 @@
 __kernel void mandel(__global char *data,
-					__global cl_mem *out,
 					int bpp,
 					int size,
-					int it,
 					int x,
 					int y,
-					float zoom_x,
-					float zoom_y,
-					float xx,
-					float yy,
-					float mouse_x,
-					float mouse_y)
+					double zoom_x,
+					double zoom_y,
+					double x1,
+					double y1,
+					double mouse_x,
+					double mouse_y,
+					int it)
 {
-	x = get_global_id(0);
-	y = get_global_id(1);
 	int i;
 	int index;
-	float cr;
-	float ci;
-	float zr;
-	float zi;
-	float tmp;
+	double cr;
+	double ci;
+	double zr;
+	double zi;
+	double tmp;
 
-	cr = x / zoom_x + xx;
-	ci = y / zoom_y + yy;
+	cr = x / zoom_x + x1;
+	ci = y / zoom_y + y1;
 	zr = 0 + mouse_x;
 	zi = 0 + mouse_y;
 	index = x * (bpp / 8) + (y * size);
