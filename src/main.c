@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/16 19:06:24 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/17 18:34:00 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		make_fractal(t_mlx *f)
 		julia(f);
 	else if (ft_strcmp(f->name, "Autre") == 0)
 		buddhabrot(f);
+	printf("draw end\n");
 	mlx_put_image_to_window(f->mlx, f->win, f->img, f->pos_x, f->pos_y);
 }
 
