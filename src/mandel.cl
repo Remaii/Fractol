@@ -7,6 +7,9 @@ __kernel void mandel(__global char * data,
 					double y1,
 					double mouse_x,
 					double mouse_y,
+					int r,
+					int g,
+					int b,
 					int it)
 {
 	int x;
@@ -26,7 +29,7 @@ __kernel void mandel(__global char * data,
 	zr = 0 + mouse_x;
 	zi = 0 + mouse_y;
 	i = 0;
-	while (zr*zr + zi*zi < 4 && i < it)
+	while (zr * zr + zi * zi < 4 && i < it)
 	{
 		tmp = zr;
 		zr = zr * zr - zi * zi + cr;
@@ -42,8 +45,8 @@ __kernel void mandel(__global char * data,
 	}
 	else
 	{
-		data[index] = 255;
-		data[index + 1] = 255;
-		data[index + 2] = 255;
+		data[index] = b * i;
+		data[index + 1] = g * i;
+		data[index + 2] = r * i;
 	}
 }

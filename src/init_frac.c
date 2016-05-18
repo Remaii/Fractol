@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 12:31:50 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/16 19:08:58 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 13:20:18 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void			verif(t_mlx *f, int ac, char **av)
 			ini_buddha(f);
 			f->name = "buddhabrot.cl";
 		}
+		f->ocl = 1;
 		init_env(f);
 		set_arg(f);
 	}
@@ -111,8 +112,9 @@ void			init_frac(t_mlx *f, int ac, char **av)
 			ini_buddha(f);
 			f->name = "Buddhabrot";
 		}
+		f->ocl = 0;
+		init_env(f);
 	}
 	else
 		verif(f, ac, av);
-	init_env(f);
 }

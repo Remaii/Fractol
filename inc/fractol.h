@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/17 18:15:02 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 13:19:29 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <stdio.h>
 
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
-# define MIN 100
-# define MAX 4000
-# define WIN_X 1024
-# define WIN_Y 1024
+# define MIN 0
+# define MAX 255
+# define WIN_X 1200
+# define WIN_Y 900
 
 # define DEBUG printf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 

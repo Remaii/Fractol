@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 12:44:07 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/16 19:22:19 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 13:03:46 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_ocl			*ocl(t_mlx *f)
 	printf("1 err = %d\n", o->err);
 	o->err = clGetPlatformIDs(1, &o->platform, &o->plat_num);
 	printf("2 err = %d\n", o->err);
-	o->err = clGetDeviceIDs(o->platform, CL_DEVICE_TYPE_GPU, 1, &o->device, &o->num_dev);
+	o->err = clGetDeviceIDs(o->platform, CL_DEVICE_TYPE_CPU, 1, &o->device, &o->num_dev);
 	printf("3 err = %d\n", o->err);
 	o->propreties[0] = CL_CONTEXT_PLATFORM;
 	o->propreties[1] = (cl_context_properties)o->platform;
@@ -79,35 +79,24 @@ void		set_arg(t_mlx *f)
 
 	if (o == NULL)
 		o = ocl(f);
-	printf("12 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 0, sizeof(cl_mem), &o->out);
-	printf("13 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 1, sizeof(int), &f->bpp);
-	printf("14 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 2, sizeof(int), &f->size);
-	printf("15 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 3, sizeof(double), &f->zoom_x);
-	printf("16 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 4, sizeof(double), &f->zoom_y);
-	printf("17 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 5, sizeof(double), &f->x1);
-	printf("18 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 6, sizeof(double), &f->y1);
-	printf("19 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 7, sizeof(double), &f->mouse_x);
-	printf("20 err = %d\n", o->err);
 	o->err = clSetKernelArg(o->kernel, 8, sizeof(double), &f->mouse_y);
-	printf("21 err = %d\n", o->err);
-	o->err = clSetKernelArg(o->kernel, 9, sizeof(int), &f->it);
-	printf("22 err = %d\n", o->err);
+	o->err = clSetKernelArg(o->kernel, 9, sizeof(int), &f->r);
+	o->err = clSetKernelArg(o->kernel, 10, sizeof(int), &f->g);
+	o->err = clSetKernelArg(o->kernel, 11, sizeof(int), &f->b);
+	o->err = clSetKernelArg(o->kernel, 12, sizeof(int), &f->it);
 	o->err = clEnqueueNDRangeKernel(o->cmd_queue, o->kernel, 2, NULL, o->global,
 			NULL, 0, NULL, NULL);
-	printf("23 err = %d\n", o->err);
 	o->err = clFinish(o->cmd_queue);
-	printf("24 err = %d\n", o->err);
 	o->err = clEnqueueReadBuffer(o->cmd_queue, o->out, CL_TRUE, 0,
 			WIN_X * f->size, f->data, 0, NULL, NULL);
-	printf("25 err = %d\n", o->err);
 }
 /*
 int		main()
