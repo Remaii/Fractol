@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 12:44:07 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 13:03:46 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:16:14 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,26 @@ t_ocl			*ocl(t_mlx *f)
 
 	o = ft_memalloc(sizeof(t_ocl));
 	o->err = 0;
-	printf("1 err = %d\n", o->err);
 	o->err = clGetPlatformIDs(1, &o->platform, &o->plat_num);
-	printf("2 err = %d\n", o->err);
-	o->err = clGetDeviceIDs(o->platform, CL_DEVICE_TYPE_CPU, 1, &o->device, &o->num_dev);
-	printf("3 err = %d\n", o->err);
+	o->err = clGetDeviceIDs(o->platform, CL_DEVICE_TYPE_CPU, 1, &o->device,\
+																&o->num_dev);
 	o->propreties[0] = CL_CONTEXT_PLATFORM;
 	o->propreties[1] = (cl_context_properties)o->platform;
 	o->propreties[2] = 0;
-	o->context = clCreateContext(o->propreties, o->num_dev, &o->device, notify, NULL, &o->err);
-	printf("4 err = %d\n", o->err);
+	o->context = clCreateContext(o->propreties, o->num_dev, &o->device, notify,\
+																NULL, &o->err);
 	o->file = load_cl(f->name, o);
-	printf("5 err = %d\n", o->err);
 	o->cmd_queue = clCreateCommandQueue(o->context, o->device, 0, &o->err);
-	printf("6 err = %d\n", o->err);
-	o->program = clCreateProgramWithSource(o->context, 1, (const char **)&o->file, NULL, &o->err);
-	printf("7 err = %d\n", o->err);
-	o->err = clBuildProgram(o->program, o->num_dev, &o->device, NULL, NULL, NULL);
-	printf("8 err = %d\n", o->err);
+	o->program = clCreateProgramWithSource(o->context, 1,\
+										(const char **)&o->file, NULL, &o->err);
+	o->err = clBuildProgram(o->program, o->num_dev, &o->device, NULL, NULL,\
+																		NULL);
 	o->kernel = clCreateKernel(o->program, "mandel", &o->err);
-	printf("9 err = %d\n", o->err);
-	o->out = clCreateBuffer(o->context, CL_MEM_WRITE_ONLY, WIN_X * f->size, NULL, &o->err);
-	printf("10 err = %d\n", o->err);
+	o->out = clCreateBuffer(o->context, CL_MEM_WRITE_ONLY, WIN_X * f->size,\
+																NULL, &o->err);
 	o->global[0] = WIN_X;
 	o->global[1] = WIN_Y;
 	o->global[2] = 0;
-	printf("11 err = %d\n", o->err);
 	return (o);
 }
 

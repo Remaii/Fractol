@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 12:55:04 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 15:53:04 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void		make_fractal(t_mlx *f)
 		mandelbrot(f);
 	else if (ft_strcmp(f->name, "Julia") == 0)
 		julia(f);
-	else if (ft_strcmp(f->name, "Autre") == 0)
+	else if (ft_strcmp(f->name, "Buddhabrot") == 0)
 		buddhabrot(f);
 	else if (f->ocl == 1)
 		set_arg(f);
-	printf("draw end\n");
 	mlx_put_image_to_window(f->mlx, f->win, f->img, f->pos_x, f->pos_y);
 }
 

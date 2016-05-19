@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 13:23:44 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/19 00:39:05 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define USAGE "./fractol Mandelbrot | Julia | Autre"
 # define MIN 0
 # define MAX 255
-# define WIN_X 1200
-# define WIN_Y 900
+# define WIN_X 1024
+# define WIN_Y 1024
 
 # define DEBUG printf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
@@ -90,6 +90,9 @@ typedef struct		s_mlx
 	int				r;
 	int				g;
 	int				b;
+	int				min[3];
+	int				max[3];
+	int				***map;
 	double			mouse_x;
 	double			mouse_y;
 	int				julia;

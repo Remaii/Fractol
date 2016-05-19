@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 12:31:50 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 13:20:18 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 20:42:38 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void			ini_buddha(t_mlx *f)
 {
-	f->x1 = -1.125;
+	f->x1 = 1.5;
 	f->y1 = -2;
 	f->x2 = 1.125;
 	f->y2 = 1;
-	f->it = 1000;
+	if (f->ocl == 1)
+		f->it = 1000;
+	else
+		f->it = 50;
 	f->mouse_x = 0;
 	f->mouse_y = 0;
 	f->img_x = WIN_X;
@@ -33,7 +36,10 @@ void			ini_mandelbrot(t_mlx *f)
 	f->y1 = -1.2;
 	f->x2 = 0.6;
 	f->y2 = 1.2;
-	f->it = 50;
+	if (f->ocl == 1)
+		f->it = 100;
+	else
+		f->it = 50;
 	f->mouse_x = 0;
 	f->mouse_y = 0;
 	f->img_x = WIN_X;
@@ -48,9 +54,10 @@ void			ini_julia(t_mlx *f)
 	f->y1 = -2;
 	f->x2 = 2;
 	f->y2 = 2;
-	f->it = 50;
-	f->mouse_x = 0;
-	f->mouse_y = 0;
+	if (f->ocl == 1)
+		f->it = 100;
+	else
+		f->it = 50;
 	f->img_x = WIN_X;
 	f->img_y = WIN_Y;
 	f->zoom_x = f->img_x / (f->x2 - f->x1);
@@ -62,6 +69,7 @@ void			verif(t_mlx *f, int ac, char **av)
 {
 	if (ac == 3 && ft_strcmp(av[2], "cl") == 0)
 	{
+		f->ocl = 1;
 		if (ft_strcmp(av[1], "Mandelbrot") == 0 || ft_strcmp(av[1], "M") == 0 \
 				|| ft_strcmp(av[1], "m") == 0)
 		{
@@ -73,7 +81,7 @@ void			verif(t_mlx *f, int ac, char **av)
 		{
 			f->julia = 1;
 			ini_julia(f);
-			f->name = "julia.cl";
+			f->name = "src/julia.cl";
 		}
 		else if (ft_strcmp(av[1], "Buddhabrot") == 0 || ft_strcmp(av[1], "B") == 0 \
 				|| ft_strcmp(av[1], "b") == 0)
@@ -81,7 +89,6 @@ void			verif(t_mlx *f, int ac, char **av)
 			ini_buddha(f);
 			f->name = "buddhabrot.cl";
 		}
-		f->ocl = 1;
 		init_env(f);
 		set_arg(f);
 	}
