@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 10:36:40 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 13:22:48 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/20 18:27:16 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ void		move(t_mlx *f, int key)
 {
 	if (key == 123)
 	{
-		f->x1 -= 0.05;
-		f->x2 -= 0.05;
+		f->x1 -= 0.025;
+		f->x2 -= 0.025;
 	}
 	else if (key == 124)
 	{
-		f->x1 += 0.05;
-		f->x2 += 0.05;
+		f->x1 += 0.025;
+		f->x2 += 0.025;
 	}
 	else if (key == 126)
 	{
-		f->y1 -= 0.05;
-		f->y2 -= 0.05;
+		f->y1 -= 0.025;
+		f->y2 -= 0.025;
 	}
 	else if (key == 125)
 	{
-		f->y1 += 0.05;
-		f->y2 += 0.05;
+		f->y1 += 0.025;
+		f->y2 += 0.025;
 	}
 }
 
@@ -102,7 +102,7 @@ int			ft_mouse(int but, int x, int y, t_mlx *f)
 		f->mouse_y = ((double)y - 500) / 500;//y * 0.0005;
 	}
 	else if (but == 4 || but == 5)
-		zoom(but, (f->img_x / 2), (f->img_y / 2), f);
+		zoom(but, x, y, f);//(f->img_x / 2), (f->img_y / 2), f);
 	ini_img(f);
 	make_fractal(f);
 	return (0);

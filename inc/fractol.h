@@ -6,7 +6,7 @@
 /*   By: rthidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:53:26 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/19 00:39:05 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/20 20:13:46 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 
 # define DEBUG printf("%d - %s - %s\n", __LINE__, __func__, __FILE__);
 
-typedef struct		s_comp
+typedef struct			s_comp
 {
-	double		r;
-	double		i;
-}									t_comp;
+	double				r;
+	double				i;
+}						t_comp;
 
 typedef struct			s_ocl
 {
@@ -90,7 +90,6 @@ typedef struct		s_mlx
 	int				r;
 	int				g;
 	int				b;
-	int				min[3];
 	int				max[3];
 	int				***map;
 	double			mouse_x;
