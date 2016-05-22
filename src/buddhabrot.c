@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 14:13:32 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/20 19:21:11 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/18 21:22:20 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,21 +32,29 @@ void	buddha(double x, double y, int **img, int i, t_mlx *f)
 	double b;
 	int tx;
 	int ty;
+//	int comp;
+//	char div = 0;
 
 	a = x;
 	b = y;
 	iter = f->min[i];
-	while (iter <= f->max[i] /*&& pow(x, 2) * pow(y, 2) < 0.5*/)
+//printf("\niter= %d, a= %f, b= %f\t", iter, x, y);
+//printf("pow < 1 = %f\t", (pow(x, 2) * pow(y, 2)));
+	while (iter <= f->max[i] && pow(x, 2) * pow(y, 2) < 1)
 	{
-		tmp_x = pow(x, 2) - pow(y, 2) + f->ci;
-		y = 2 * x * y + f->cr;
+//printf("pow < 1 = %f\n", (pow(x, 2) * pow(y, 2)));
+		tmp_x = pow(x, 2) - pow(y, 2) + a;
+		y = 2 * x * y + b;
 		x = tmp_x;
+//printf("if (x= %f, y= %f) < 4 = %f \n ", x, y, pow(x, 2) + pow(y, 2));
 		if (pow(x, 2) + pow(y, 2) < 4)
 		{
 			tx = (int)((x + 1.8) * 500) / 2.0;//x + position * zoom / 2
 			ty = (int)((y + 1.7) * 500) / 2.0;// y + position * zoom / 2
+//printf("\t\ttx= %d, ty= %d, ", tx, ty);
 			if (tx > 0 && tx < f->img_x && ty > 0 && ty < f->img_y)
 			{
+//printf("tx2= %d, ty2= %d, iter= %d, min= %d, max= %d\n", tx, ty, iter, f->min[i], f->max[i]);
 				if (iter > f->min[i] && iter < f->max[i])
 					img[ty][tx] += i;
 			}
@@ -55,38 +63,9 @@ void	buddha(double x, double y, int **img, int i, t_mlx *f)
 	}
 }
 
-void	test(t_mlx *f, double ci, double cr)
-{
-	int tx;
-	int ty;
-	int index;
-
-	index = f->x * (f->bpp / 8) + f->y * f->size;
-	if (pow(f->ci, 2) + pow(f->cr, 2) < 5)
-	{
-		tx = (int)((cr + 1.8) * 500) / 2.0;//x + position * zoom / 2
-		ty = (int)((ci + 1.7) * 500) / 2.0;// y + position * zoom / 2
-		if (tx > 0 && tx < f->img_x && ty > 0 && ty < f->img_y)
-		{
-			f->data[index] = 0;
-			f->data[index + 1] = 0;
-			f->data[index + 2] = 0;
-		}
-	}
-	else
-	{
-		f->data[index] = f->b * (f->it + 1);
-		f->data[index + 1] = f->g * (f->it + 2);
-		f->data[index + 2] = f->r * (f->it + 3);
-	}
-
-}
 void	draw(t_mlx *f)
 {
 	int i;
-//	int tx;
-//	int ty;
-//	int index;
 	int pr = 0;
 
 	f->x = 0;
@@ -95,35 +74,12 @@ void	draw(t_mlx *f)
 		f->y = 0;
 		while (f->y < f->img_y)
 		{
-			f->ci = ((double)(f->y * 3) / f->img_y) + f->y1;// - 2;
-			f->cr = ((double)(f->x * (-3)) / f->img_x) + f->x1;// + 1.5;
-			f->cr2 = f->cr;
-			f->ci2 = f->ci;
+			f->cr = ((double)(f->x * (-3)) / f->img_x) + 1.5;
+			f->ci = ((double)(f->y * 3) / f->img_y) - 2;
 			i = 0;
 			while (i < 3)
 			{
-				f->it = f->min[i];
-				while (f->it < f->max[i] && pow(f->cr, 2) * pow(f->ci, 2) < 2)
-				{
-//					buddha(f->ci, f->cr, f->map[i], i, f);
-					f->tmp = pow(f->ci, 2) - pow(f->cr, 2) + f->ci2;
-					f->cr = 2 * f->cr * f->ci + f->cr2;
-					f->ci = f->tmp;
-					test(f, f->ci, f->cr);/*
-					if (pow(f->ci, 2) + pow(f->cr, 2) < 4)
-					{
-						tx = (int)((f->cr + 1.8) * 500) / 2.0;//x + position * zoom / 2
-						ty = (int)((f->ci + 1.7) * 500) / 2.0;// y + position * zoom / 2
-						if (tx > 0 && tx < f->img_x && ty > 0 && ty < f->img_y)
-						{
-							index = f->x * (f->bpp / 8) + f->y * f->size;
-							f->data[index] = f->b * (i + 1);
-							f->data[index + 1] = f->g * (i + 2);
-							f->data[index + 2] = f->r * (i + 3);
-						}
-					}*/
-					f->it++;
-				}
+				buddha(f->ci, f->cr, f->map[i], i, f);
 				i++;
 			}
 			f->y++;
@@ -154,10 +110,10 @@ void	color(t_mlx *f)
 	int val;
 
 	y = 0;
-	while (y < f->img_y)
+	while (y < f->img_x)
 	{
 		x = 0;
-		while (x < f->img_x)
+		while (x < f->img_y)
 		{
 			val = x * (f->bpp / 8) + y * f->size;
 			color[0] = ft_abs(f->map[0][x][y]);
@@ -194,6 +150,33 @@ int		***initimg()
 	return (img);
 }
 
+void	cat(int ***img)
+{
+	int x;
+	int y;
+	int i;
+
+	i = 0;
+	while (i < 3)
+	{
+		printf("map %d :\n", i);
+		x = 0;
+		while (x < WIN_X)
+		{
+			y = 0;
+			while (y < WIN_Y)
+			{
+				printf("%d ", img[i][x][y]);
+				y++;
+			}
+			printf("\n");
+			x++;
+		}
+		i++;
+	}
+	printf("fin map\n");
+}
+
 void buddhabrot(t_mlx *f)
 {
 	f->min[0] = 0;
@@ -204,5 +187,6 @@ void buddhabrot(t_mlx *f)
 	f->max[2] = 1000;
 	f->map = initimg();
 	draw(f);
-//	color(f);
+	cat(f->map);
+	color(f);
 }

@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 12:17:51 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/17 19:01:56 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/22 00:43:32 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void		make_point(t_mlx *f, int i, int it)
 	}
 	else
 	{
-		f->data[index] = f->i * f->b / f->it;
-		f->data[index + 1] = f->i * f->g / f->it;
-		f->data[index + 2] = f->i * f->r / f->it;
+		f->data[index] = f->i * f->b;// / f->it;
+		f->data[index + 1] = f->i * f->g;// / f->it;
+		f->data[index + 2] = f->i * f->r;// / f->it;
 	}
 }
 

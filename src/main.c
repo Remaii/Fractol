@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 15:53:04 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/22 00:29:56 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		make_fractal(t_mlx *f)
 	else if (f->ocl == 1)
 		set_arg(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, f->pos_x, f->pos_y);
+	mlx_string_put(f->mlx, f->win, 5, 1, 0x00FFFFFF, ft_itoa(f->it));
 }
 
 int			main(int ac, char **av)

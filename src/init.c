@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 13:02:30 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/18 13:15:12 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/22 00:20:55 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		init_env(t_mlx *f)
 
 void		re_init_frac(t_mlx *f)
 {
+	f->coef = 0.78;
 	if (ft_strcmp(f->name, "Mandelbrot") == 0 ||
 			ft_strcmp(f->name, "src/mandel.cl") == 0)
 		ini_mandelbrot(f);
