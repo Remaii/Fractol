@@ -32,7 +32,7 @@ cd Fractol
 
 make
 
-No OpenCL = ./fractol (with name of fractal, Mandelbrot, Julia, Burningship | you can use just first letter of fractal name)
+No OpenCL = ./fractol [with name of fractal, Mandelbrot, Julia, Burningship | you can use just first letter of fractal name]
 
           example : ./fractol m -> launch Mandelbrot
                     ./fractol j -> launch Julia
