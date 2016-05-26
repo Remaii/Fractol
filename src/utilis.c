@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 12:17:51 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 16:16:40 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 20:46:02 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void		make_point(t_mlx *f, int i, int it)
 void		error(int nb)
 {
 	if (nb == 1 || nb == 2)
-	{
-		ft_putnbr(nb);
 		ft_putendl(USAGE);
-	}
 	else
 		ft_putnbr(nb);
 	exit(0);

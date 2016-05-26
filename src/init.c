@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 20:24:58 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 15:45:31 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 20:48:56 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void		init_env(t_mlx *f)
 {
 	f->wid = WID;
 	f->hig = HIG;
-	FF(r) = 10;
+	FF(r) = 5;
 	FF(g) = 10;
-	FF(b) = 10;
+	FF(b) = 5;
 	FF(zoom) = 0;
 	f->crt_img = 0;
 	FF(julia) = 1;
@@ -48,6 +48,9 @@ void		re_init_frac(t_mlx *f)
 {
 	FF(coef) = 0.78;
 	FF(zoom) = 0;
+	FF(r) = 5;
+	FF(g) = 10;
+	FF(b) = 5;
 	if (ft_strcmp(f->name, "Mandelbrot") == 0)
 		ini_mandelbrot(f);
 	else if (ft_strcmp(f->name, "Julia") == 0)

@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:24:31 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 16:28:52 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 20:57:05 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void		zoom(int but, int x, int y, t_mlx *f)
 	if (but == 5 || but == 27)
 	{
 		FF(zoom)--;
-		FF(coef) /= 0.25;
+		FF(coef) /= 0.50;
 		zoomin(f, x, y);
 	}
 	else
 	{
 		FF(zoom)++;
-		FF(coef) *= 0.25;
+		FF(coef) *= 0.50;
 		zoomout(f, x, y);
 	}
 }

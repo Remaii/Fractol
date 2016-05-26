@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 20:27:09 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 13:01:41 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 20:44:52 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void			ifocl(t_mlx *f, int ac, char **av)
 				f->path = "Kernel/burningship.cl";
 			re_init_frac(f);
 		}
+		else
+			ft_putendl("Invalid 2nd argument");
+			ft_putendl("Type \"cl\" for calculate in OpenCL");
 	}
 }
 
@@ -93,6 +96,8 @@ void			init_frac(t_mlx *f, int ac, char **av)
 		else if (ft_strcmp(av[1], "Burningship") == 0 \
 				|| ft_strcmp(av[1], "B") == 0 || ft_strcmp(av[1], "b") == 0)
 			f->name = "Burning-Ship";
+		else
+			error(2);
 		init_env(f);
 		re_init_frac(f);
 		ifocl(f, ac, av);

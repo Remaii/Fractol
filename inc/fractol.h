@@ -6,14 +6,14 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 18:06:39 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 12:47:21 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 20:47:31 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define USAGE "./fractol (Mandelbrot | Julia | Mini_bouddha)"
+# define USAGE "./fractol [Mandelbrot/M/m | Julia/J/j | Burningship/B/b] [cl]"
 # define WID 1000
 # define HIG 1000
 # define MAX 400
