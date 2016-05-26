@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 10:36:40 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/22 00:25:02 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 16:26:25 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,45 @@ void		move(t_mlx *f, int key)
 {
 	if (key == 124)
 	{
-		f->x1 -= 0.05;
-		f->x2 -= 0.05;
+		FF(x1) -= 0.05;
+		FF(x2) -= 0.05;
 	}
 	else if (key == 123)
 	{
-		f->x1 += 0.05;
-		f->x2 += 0.05;
+		FF(x1) += 0.05;
+		FF(x2) += 0.05;
 	}
 	else if (key == 125)
 	{
-		f->y1 -= 0.05;
-		f->y2 -= 0.05;
+		FF(y1) -= 0.05;
+		FF(y2) -= 0.05;
 	}
 	else if (key == 126)
 	{
-		f->y1 += 0.05;
-		f->y2 += 0.05;
+		FF(y1) += 0.05;
+		FF(y2) += 0.05;
 	}
+}
+void		ft_color(int key, t_mlx *f)
+{
+	if (key == 8)
+	{
+		FF(r) = (rand() % (MAX - MIN + 1)) + MIN;
+		FF(g) = (rand() % (MAX - MIN + 1)) + MIN;
+		FF(b) = (rand() % (MAX - MIN + 1)) + MIN;
+	}
+	else if (key == 15)
+		(FF(r) < MAX ? FF(r)++ : MAX);
+	else if (key == 5)
+		(FF(g) < MAX ? FF(g)++ : MAX);
+	else if (key == 11)
+		(FF(b) < MAX ? FF(b)++ : MAX);
+	else if (key == 14)
+		(FF(r) >= MIN ? FF(r)-- : MIN);
+	else if (key == 3)
+		(FF(g) >= MIN ? FF(g)-- : MIN);
+	else if (key == 9)
+		(FF(b) >= MIN ? FF(b)-- : MIN);
 }
 
 int			ft_key(int key, t_mlx *f)
@@ -48,26 +69,23 @@ int			ft_key(int key, t_mlx *f)
 		ft_stop(f);
 	else if (key == 123 || key == 124 || key == 125 || key == 126)
 		move(f, key);
-	else if (key == 15)
+	else if (key == 31)
 		re_init_frac(f);
-	else if (key == 8)
-	{
-		f->r = (rand() % (MAX - MIN + 1)) + MIN;
-		f->g = (rand() % (MAX - MIN + 1)) + MIN;
-		f->b = (rand() % (MAX - MIN + 1)) + MIN;
-	}
+	else if (key == 8 || key == 15 || key == 5 || key == 11 || key == 14 || \
+			key == 3 || key == 9)
+		ft_color(key, f);
 	else if (key == 24 || key == 27)
-		zoom(key, (f->img_x / 2), (f->img_y / 2), f);
+		zoom(key, (f->wid / 2), (f->hig / 2), f);
 	else if (key == 43)
-		f->it -= 5;
+		FF(it) -= 5;
 	else if (key == 47)
-		f->it += 5;
+		FF(it) += 5;
 	else if (key == 38)
 	{
-		if (f->julia > 4)
-			f->julia = 1;
+		if (FF(julia) > 4)
+			FF(julia) = 1;
 		else
-			f->julia++;
+			FF(julia)++;
 		choose_julia(f);
 	}
 	ini_img(f);
@@ -81,10 +99,10 @@ int			ft_key(int key, t_mlx *f)
 
 int			mouse_move(int x, int y, t_mlx *f)
 {
-	if (x <= (int)f->img_x && y <= (int)f->img_y && f->motion == 1)
+	if (x <= (int)f->wid && y <= (int)f->hig && f->motion == 1)
 	{
-		f->mouse_x = ((double)x - 500) / 500;//x * 0.0005;
-		f->mouse_y = ((double)y - 500) / 500;//y * 0.0005;
+		FF(mouse_x) = ((double)x - 500) / 500;
+		FF(mouse_y) = ((double)y - 500) / 500;
 		ini_img(f);
 		make_fractal(f);
 	}
@@ -102,8 +120,8 @@ int			ft_mouse(int but, int x, int y, t_mlx *f)
 	}
 	else if (but == 2 && f->motion == 0)
 	{
-		f->mouse_x = ((double)x - 500) / 500;//x * 0.0005;
-		f->mouse_y = ((double)y - 500) / 500;//y * 0.0005;
+		FF(mouse_x) = ((double)x - 500) / 500;
+		FF(mouse_y) = ((double)y - 500) / 500;
 	}
 	else if (but == 4 || but == 5)
 		zoom(but, x, y, f);

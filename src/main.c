@@ -5,39 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/25 11:56:38 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/22 00:29:56 by rthidet          ###   ########.fr       */
+/*   Created: 2016/05/11 18:00:37 by rthidet           #+#    #+#             */
+/*   Updated: 2016/05/26 12:55:29 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-void			choose_julia(t_mlx *f)
+int			make_fractal(t_mlx *f)
 {
-	if (f->julia == 1)
-		set_julia1(f);
-	else if (f->julia == 2)
-		set_julia2(f);
-	else if (f->julia == 3)
-		set_julia3(f);
-	else if (f->julia == 4)
-		set_julia4(f);
-	else if (f->julia == 5)
-		set_julia5(f);
-}
-
-void		make_fractal(t_mlx *f)
-{
-	if (ft_strcmp(f->name, "Mandelbrot") == 0)
+	if (f->ocl == 1)
+		set_arg(f);
+	else if (ft_strcmp(f->name, "Mandelbrot") == 0)
 		mandelbrot(f);
 	else if (ft_strcmp(f->name, "Julia") == 0)
 		julia(f);
-	else if (ft_strcmp(f->name, "Buddhabrot") == 0)
-		buddhabrot(f);
-	else if (f->ocl == 1)
-		set_arg(f);
-	mlx_put_image_to_window(f->mlx, f->win, f->img, f->pos_x, f->pos_y);
-	mlx_string_put(f->mlx, f->win, 5, 1, 0x00FFFFFF, ft_itoa(f->it));
+	else if (ft_strcmp(f->name, "Burning-Ship") == 0)
+		burningship(f);
+	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
+	display(f);
+	return (0);
 }
 
 int			main(int ac, char **av)

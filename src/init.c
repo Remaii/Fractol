@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/25 13:02:30 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/22 00:20:55 by rthidet          ###   ########.fr       */
+/*   Created: 2016/05/24 20:24:58 by rthidet           #+#    #+#             */
+/*   Updated: 2016/05/26 15:45:31 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,44 @@
 
 void		ini_img(t_mlx *f)
 {
-	if (!f->img)
+	if (f->crt_img == 0)
 	{
-		f->img = mlx_new_image(f->mlx, f->img_x, f->img_y);
+		f->img = mlx_new_image(f->mlx, f->wid, f->hig);
 		f->data = mlx_get_data_addr(f->img, &(f->bpp), &(f->size), &(f->end));
+		f->crt_img = 1;
 	}
 	else
 	{
 		mlx_destroy_image(f->mlx, f->img);
-		f->img = mlx_new_image(f->mlx, f->img_x, f->img_y);
+		f->img = mlx_new_image(f->mlx, f->wid, f->hig);
 		f->data = mlx_get_data_addr(f->img, &(f->bpp), &(f->size), &(f->end));
 	}
 }
 
 void		init_env(t_mlx *f)
 {
-	f->mlx = mlx_init();
-	f->win = mlx_new_window(f->mlx, f->img_x, f->img_y, f->name);
-	ini_img(f);
-	f->pos_x = 0;
-	f->pos_y = 0;
-	f->r = 0;
-	f->g = 200;
-	f->b = 0;
-	f->julia = 1;
+	f->wid = WID;
+	f->hig = HIG;
+	FF(r) = 10;
+	FF(g) = 10;
+	FF(b) = 10;
+	FF(zoom) = 0;
+	f->crt_img = 0;
+	FF(julia) = 1;
 	f->motion = 0;
+	f->mlx = mlx_init();
+	f->win = mlx_new_window(f->mlx, f->wid, f->hig, f->name);
+	ini_img(f);
 }
 
 void		re_init_frac(t_mlx *f)
 {
-	f->coef = 0.78;
-	if (ft_strcmp(f->name, "Mandelbrot") == 0 ||
-			ft_strcmp(f->name, "src/mandel.cl") == 0)
+	FF(coef) = 0.78;
+	FF(zoom) = 0;
+	if (ft_strcmp(f->name, "Mandelbrot") == 0)
 		ini_mandelbrot(f);
-	else if (ft_strcmp(f->name, "Julia") == 0 ||
-			ft_strcmp(f->name, "src/julia.cl") == 0)
+	else if (ft_strcmp(f->name, "Julia") == 0)
 		ini_julia(f);
-	else if (ft_strcmp(f->name, "Buddhabrot") == 0 ||
-			ft_strcmp(f->name, "src/buddha.cl") == 0)
-		ini_buddha(f);
+	else if (ft_strcmp(f->name, "Burning-Ship") == 0)
+		ini_burning(f);
 }

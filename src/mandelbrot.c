@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 13:56:22 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/19 12:12:03 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/25 02:37:40 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void			mandelbrot(t_mlx *f)
 {
-	f->x = 0;
-	while (f->x < f->img_x)
+	FF(x) = 0;
+	while (FF(x) < f->wid)
 	{
-		f->y = 0;
-		while (f->y < f->img_y)
+		FF(y) = 0;
+		while (FF(y) < f->hig)
 		{
-			f->cr = f->x / f->zoom_x + f->x1;
-			f->ci = f->y / f->zoom_y + f->y1;
-			f->zr = 0 + f->mouse_x;
-			f->zi = 0 + f->mouse_y;
-			f->i = 0;
-			while (f->zr * f->zr + f->zi * f->zi < 4 && f->i < f->it)
+			FF(c).r = FF(x) / FF(zoom_x) + FF(x1);
+			FF(c).i = FF(y) / FF(zoom_y) + FF(y1);
+			FF(z).r = 0 + FF(mouse_x);
+			FF(z).i = 0 + FF(mouse_y);
+			FF(i) = 0;
+			while (FF(z).r * FF(z).r + FF(z).i * FF(z).i < 4 && FF(i) < FF(it))
 			{
-				f->tmp = f->zr;
-				f->zr = f->zr * f->zr - f->zi * f->zi + f->cr;
-				f->zi = 2 * f->zi * f->tmp + f->ci;
-				f->i++;
-				make_point(f, f->i, f->it);
+				FF(tmp) = FF(z).r;
+				FF(z).r = FF(z).r * FF(z).r - FF(z).i * FF(z).i + FF(c).r;
+				FF(z).i = 2 * FF(z).i * FF(tmp) + FF(c).i;
+				FF(i)++;
+				make_point(f, FF(i), FF(it));
 			}
-			f->y++;
+			FF(y)++;
 		}
-		f->x++;
+		FF(x)++;
 	}
 }

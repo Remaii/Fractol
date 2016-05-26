@@ -1,26 +1,29 @@
-#*****************************************************************************#
-#*                                                                            *#
-#*                                                        :::      ::::::::   *#
-#*   Makefile                                           :+:      :+:    :+:   *#
-#*                                                    +:+ +:+         +:+     *#
-#*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        *#
-#*                                                +#+#+#+#+#+   +#+           *#
-#*   Created: 2015/12/06 13:02:35 by rthidet           #+#    #+#             *#
-#*   Updated: 2016/03/31 15:28:19 by rthidet          ###   ########.fr       *#
-#*                                                                            *#
-#******************************************************************************#
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/12/06 13:02:35 by rthidet           #+#    #+#              #
+#*   Updated: 2016/05/25 00:37:51 by rthidet          ###   ########.fr       *#
+#                                                                              #
+# **************************************************************************** #
 
 NAME = fractol
-LFT = inc/libft.a
-LIBS =-L./inc/ -lft -lmlx
 
+SRC = *.c #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# LIB & H
+LMLX = -L ./mlx/ -lmlx
+LIBFT = -L ./libft/ -lft
+LIBS = $(LIBFT) $(LMLX)
 HPATH = -I ./inc/
 
-SRC = *.c
-
-#STANDARD VARIABLES
+# STANDARD VARIABLES
 CC = gcc -Wall -Wextra -Werror
-C_MLX = -framework OpenGL -framework AppKit -framework OpenCL
+OCL = -framework OpenCL
+C_MLX = -framework OpenGL -framework AppKit $(OCL)
 AR = ar -cvq libft.a
 RM = rm -rf
 SRCDIR = $(addprefix ./src/, $(SRC))
@@ -46,6 +49,8 @@ KO = $(RED)[KO!]$(RESET)
 
 # START RULES
 $(NAME):
+	@make -C mlx
+	@make -C libft
 	@$(CC) -c $(SRCDIR)
 	@mkdir -p $(OBJDIR) && mv $(SRC:.c=.o) ./$(OBJDIR)/
 	@echo "$(RED)Building $(WHITE)...$(NAME)...$(RESET)"
@@ -59,6 +64,8 @@ clean:
 	@$(RM) $(OBJDIR)
 
 fclean: clean
+	@make fclean -C libft
+	@make clean -C mlx
 	@echo "$(CYAN)Removal $(NAME)$(RESET)"
 	@$(RM) $(NAME)
 

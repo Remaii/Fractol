@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 12:17:51 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/22 00:43:32 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/05/26 16:16:40 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		make_point(t_mlx *f, int i, int it)
 {
 	int		index;
 
-	index = f->x * (f->bpp / 8) + (f->y * f->size);
+	index = FF(x) * (f->bpp / 8) + (FF(y) * f->size);
 	if (i == it)
 	{
 		f->data[index] = 0;
@@ -25,9 +25,9 @@ void		make_point(t_mlx *f, int i, int it)
 	}
 	else
 	{
-		f->data[index] = f->i * f->b;// / f->it;
-		f->data[index + 1] = f->i * f->g;// / f->it;
-		f->data[index + 2] = f->i * f->r;// / f->it;
+		f->data[index] = i * FF(b);
+		f->data[index + 1] = i * FF(g);
+		f->data[index + 2] = i * FF(r);
 	}
 }
 
@@ -38,8 +38,6 @@ void		error(int nb)
 		ft_putnbr(nb);
 		ft_putendl(USAGE);
 	}
-	else if (nb == 3)
-		ft_putendl("error 3");
 	else
 		ft_putnbr(nb);
 	exit(0);
@@ -51,4 +49,18 @@ void		ft_stop(t_mlx *f)
 	mlx_destroy_window(f->mlx, f->win);
 	ft_putendl("End Of Program");
 	exit(0);
+}
+
+void		choose_julia(t_mlx *f)
+{
+	if (FF(julia) == 1)
+		set_julia1(f);
+	else if (FF(julia) == 2)
+		set_julia2(f);
+	else if (FF(julia) == 3)
+		set_julia3(f);
+	else if (FF(julia) == 4)
+		set_julia4(f);
+	else if (FF(julia) == 5)
+		set_julia5(f);
 }

@@ -1,4 +1,4 @@
-__kernel void mandel(__global char * data,
+__kernel void fractal(__global char * data,
 					int bpp,
 					int size,
 					double zoom_x,
@@ -24,10 +24,10 @@ __kernel void mandel(__global char * data,
 
 	x = get_global_id(0);
 	y = get_global_id(1);
-	zr = x / zoom_x + x1;
-	zi = y / zoom_y + y1;
-	cr = mouse_x;
-	ci = mouse_y;
+	cr = x / zoom_x + x1;
+	ci = y / zoom_y + y1;
+	zr = 0 + mouse_x;
+	zi = 0 + mouse_y;
 	i = 0;
 	while (zr * zr + zi * zi < 4 && i < it)
 	{
