@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 12:17:51 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 20:46:02 by rthidet          ###   ########.fr       */
+/*   Updated: 2017/08/07 19:49:35 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void		make_point(t_mlx *f, int i, int it)
 {
 	int		index;
+	int blanc = 255;
 
 	index = FF(x) * (f->bpp / 8) + (FF(y) * f->size);
 	if (i == it)
 	{
-		f->data[index] = 0;
-		f->data[index + 1] = 0;
-		f->data[index + 2] = 0;
+		f->data[index] = blanc;
+		f->data[index + 1] = blanc;
+		f->data[index + 2] = blanc;
 	}
 	else
 	{

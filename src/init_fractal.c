@@ -6,7 +6,7 @@
 /*   By: rthidet <rthidet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 20:27:09 by rthidet           #+#    #+#             */
-/*   Updated: 2016/05/26 20:44:52 by rthidet          ###   ########.fr       */
+/*   Updated: 2016/06/12 11:51:39 by rthidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void			ifocl(t_mlx *f, int ac, char **av)
 			re_init_frac(f);
 		}
 		else
+		{
 			ft_putendl("Invalid 2nd argument");
 			ft_putendl("Type \"cl\" for calculate in OpenCL");
+		}
 	}
 }
 
